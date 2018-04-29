@@ -4,15 +4,6 @@ defmodule Hello.Router do
   plug :match
   plug :dispatch
 
-  get "/hello" do
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "Hello world\n")
-  end
-
-  get "/hello/:name" do
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "Hello #{name}\n")
-  end
+  get "/hello", to: Hello, init_opts: [fun: :hello]
+  get "/hello/:name", to: Hello, init_opts: [fun: :hello_who]
 end
